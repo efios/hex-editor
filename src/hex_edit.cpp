@@ -1,39 +1,39 @@
-#include <iostream>
+#include <stdio.h>
 #include <fstream>
+#include <string>
 
-
-int ndigits(int value)
+int ndigits(int number)
 {
-    int i, temp;
-    temp = value;
-    for(i = 0; temp > 0; ++i)
-        temp = temp / 10;
+    int i = 0; 
+    for(; number != 0; ++i)
+        number = number / 10;
 
     return i;
 }
 
-int digit_at(int index, int value)
+std::string to_hex(int decimal_number)
 {
-    int i, temp;
-    temp = value;
-    if(ndigits(value) >= index)
+    std::string hex_number("", ndigits(decimal_number));
+
+    int remainder = 0;
+    int quotient = decimal_number;
+    int i = 0;
+
+    while(quotient != 0)
     {
-        for(i = 0; i < index; ++i)
-        {
-            
-        }
+        remainder = quotient % 16;
+
+        if(remainder < 10)
+            hex_number[i] = remainder + 48;
+        else
+            hex_number[i] = remainder + 55;
+
+        ++i;
+        quotient = quotient / 16;    
     }
 
-}
-
-int to_hex(int decimal_value)
-{
-    for(int i = 0; i < ndigits(decimal_value); ++i)
-    {
-
-    }
-
-    return 0;
+    hex_number[i] = '\0';
+    return hex_number;
 }
 
 int main()
@@ -45,13 +45,12 @@ int main()
 
     const short buffer_size = 1024;
     char buffer[1024];
+
+    std::string hex_num = to_hex(2555);
+    for(int i = 0; i < 4; ++i)
+        printf("%c", hex_num[i]);
     
-    int n = 1;
-    for(int i = 0; i < 10; ++i)
-    {
-        std::cout << "n" << i << " = " << n << '\n';
-        n = n << 4; 
-    }
+    printf("\n%X\n", 2555);
 
     return 0;
 }
