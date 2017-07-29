@@ -1,6 +1,7 @@
-#include <stdio.h>
+#include <array>
 #include <string>
 #include <fstream>
+#include <iostream>
 #include <algorithm>
 
 int ndigits(int number)
@@ -47,13 +48,12 @@ int main()
     std::ofstream input_file;
     input_file.open(input_file_name);
 
-    const short buffer_size = 1024;
-    char buffer[1024];
+    const unsigned short buffer_size = 1024;
 
-    std::string hex_num = to_hex(12345);
-    for(int i = 0; i < 5; ++i)
-        printf("%c", hex_num[i]);
-    
+    std::array<std::string, buffer_size> string_buffer;
+
+
+    input_file.close();
 
     return 0;
 }
