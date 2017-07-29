@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 int ndigits(int number)
 {
@@ -33,6 +34,8 @@ std::string to_hex(int decimal_number)
     }
 
     hex_number[i] = '\0';
+    std::reverse(hex_number.begin(), hex_number.end());
+
     return hex_number;
 }
 
@@ -46,11 +49,11 @@ int main()
     const short buffer_size = 1024;
     char buffer[1024];
 
-    std::string hex_num = to_hex(2555);
+    std::string hex_num = to_hex(12345);
     for(int i = 0; i < 4; ++i)
         printf("%c", hex_num[i]);
     
-    printf("\n%X\n", 2555);
+    printf("\n%X\n", 12345);
 
     return 0;
 }
