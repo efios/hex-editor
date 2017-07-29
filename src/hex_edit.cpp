@@ -1,17 +1,18 @@
 #include <stdio.h>
-#include <fstream>
 #include <string>
+#include <fstream>
 #include <algorithm>
 
 int ndigits(int number)
 {
     int i = 0; 
-    for(; number != 0; ++i)
+    for(; number > 0; ++i)
         number = number / 10;
 
     return i;
 }
 
+/* Decimal to hex (0 - FF) */
 std::string to_hex(int decimal_number)
 {
     std::string hex_number("", ndigits(decimal_number));
@@ -50,10 +51,9 @@ int main()
     char buffer[1024];
 
     std::string hex_num = to_hex(12345);
-    for(int i = 0; i < 4; ++i)
+    for(int i = 0; i < 5; ++i)
         printf("%c", hex_num[i]);
     
-    printf("\n%X\n", 12345);
 
     return 0;
 }
