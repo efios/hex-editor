@@ -1,18 +1,3 @@
-#include <array>
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <algorithm>
-
-int ndigits(int number)
-{
-    int i = 0; 
-    for(; number > 0; ++i)
-        number = number / 10;
-
-    return i;
-}
-
 /* Decimal to hex (0 - FF) */
 std::string to_hex(int decimal_number)
 {
@@ -39,25 +24,4 @@ std::string to_hex(int decimal_number)
     std::reverse(hex_number.begin(), hex_number.end());
 
     return hex_number;
-}
-
-int main()
-{
-    const char *input_file_name = "test.txt";
-
-    std::ofstream input_file;
-    input_file.open(input_file_name);
-
-    const unsigned short buffer_size = 1024;
-
-    char string_buffer[buffer_size];
-
-    for(const auto &byte : string_buffer)
-    {
-        std::cout << string_buffer[i];
-    }  
-
-    input_file.close();
-
-    return 0;
 }
