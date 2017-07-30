@@ -35,8 +35,7 @@ int main()
 
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
-
-    
+       
     printf("Enter the name of the file you want to read from:\n");
     std::string input_file_name = "";
     std::cin >> input_file_name;
