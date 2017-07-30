@@ -1,27 +1,25 @@
-#include <array>
 #include <string>
 #include <fstream>
 #include <iostream>
-#include <algorithm>
 
-#include <stdio.h>
+#include <stdio.h> /* Used for printing hex values */
 
 
 
 int main()
 {
-    using namespace std;
-    std::cout.flags(ios::hex);
-
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
 
-    std::string input_file_name = "test.txt";
-    std::ifstream input_file(input_file_name, ios::in|ios::binary|ios::ate);
+    std::string input_file_name = "";
+    printf("Enter the name of the file you want to read from\n");
+    std::cin >> input_file_name;
+
+    std::ifstream input_file(input_file_name, std::ios::in|std::ios::binary|std::ios::ate);
 
     if(input_file.is_open())
     {
-        buffer_size = input_file.tellg();
+        buffer_size = input_file.tellg(); /* Get the file length */
         char_buffer = new char[buffer_size];
 
         input_file.seekg(0, ios::beg); /* Set position to beginning of file. */
@@ -29,7 +27,7 @@ int main()
         input_file.close();
 
 
-        printf("Enter a file name\n");
+        printf("Enter the name of the file you'd like to write to\n");
         std::string output_file_name = "";
         std::cin >> output_file_name;
 
