@@ -5,14 +5,13 @@
 #include <stdio.h> /* Used for printing hex values */
 
 
-
 int main()
 {
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
 
     std::string input_file_name = "";
-    printf("Enter the name of the file you want to read from\n");
+    printf("Enter the name of the file you want to read from:\n");
     std::cin >> input_file_name;
 
     std::ifstream input_file(input_file_name, std::ios::in|std::ios::binary|std::ios::ate);
@@ -22,12 +21,12 @@ int main()
         buffer_size = input_file.tellg(); /* Get the file length */
         char_buffer = new char[buffer_size];
 
-        input_file.seekg(0, ios::beg); /* Set position to beginning of file. */
+        input_file.seekg(0, std::ios::beg); /* Set position to beginning of file. */
         input_file.read(char_buffer, buffer_size); /* Read contents of input_file into char_buffer */
         input_file.close();
 
 
-        printf("Enter the name of the file you'd like to write to\n");
+        printf("Enter the name of the file you'd like to write to:\n");
         std::string output_file_name = "";
         std::cin >> output_file_name;
 
@@ -41,10 +40,11 @@ int main()
         }
 
         delete[] char_buffer;
+        char_buffer = nullptr;
     }
     else
     {
-        std::cout << "couldn't open file\n";
+        std::cout << "The file probably doesn't exist\n";
     }
 
     return 0;

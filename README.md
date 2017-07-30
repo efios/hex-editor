@@ -1,2 +1,2 @@
 # hex-editor
-A minimalistic hex-editor written in C++(?)
+A minimalistic hex-editor written in C++
