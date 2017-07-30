@@ -1,5 +1,6 @@
 #include <string>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 
 #include <stdio.h> /* Used for printing hex values */
@@ -40,7 +41,7 @@ int main()
     std::string input_file_name = "";
     std::cin >> input_file_name;
 
-    /* input_file with the flags (input, binary and "at end") */
+    /* Open input_file with the flags (input, binary and "at end") */
     std::ifstream input_file(input_file_name, std::ios::in|std::ios::binary|std::ios::ate);
 
     if(input_file.is_open())
@@ -60,9 +61,14 @@ int main()
         std::ofstream output_file(output_file_name);
 
         if(output_file.is_open())
-        {
-            output_file.write(char_buffer, buffer_size);
+        {   
+            for(int i = 1; i <= buffer_size; ++i)
+            {
+                output_file << std::hex << std::setw(2) << std::setfill('0') <<  uint32_t(char_buffer[i]) << ' ';
 
+                if((i % (sizeof(char) << 4)) == 0)
+                    output_file << '\n';
+            }
             output_file.close();
         }
 
