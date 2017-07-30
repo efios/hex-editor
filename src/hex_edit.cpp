@@ -8,8 +8,7 @@
 #include <unistd.h>
 #include <termios.h>
 
-extern "C"
-{
+
 struct termios original_termios;
 
 void disable_raw_mode()
@@ -29,7 +28,6 @@ void enable_raw_mode()
     raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
 }
 
-} /* end of extern c */
 
 int main()
 {
