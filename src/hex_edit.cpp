@@ -3,17 +3,47 @@
 #include <iostream>
 
 #include <stdio.h> /* Used for printing hex values */
+#include <ctype.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <termios.h>
 
+extern "C"
+{
+struct termios original_termios;
+
+void disable_raw_mode()
+{
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &original_termios);
+}
+
+void enable_raw_mode()
+{
+    tcgetattr(STDIN_FILENO, &original_termios);
+    atexit(disable_raw_mode);
+
+    struct termios raw = original_termios;
+
+    raw.c_oflag &= ~(OPOST);
+    raw.c_iflag &= ~(IXON | ICRNL | BRKINT | INPCK | ISTRIP);
+    raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+}
+
+} /* end of extern c */
 
 int main()
 {
+    enable_raw_mode();
+
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
 
-    std::string input_file_name = "";
+    
     printf("Enter the name of the file you want to read from:\n");
+    std::string input_file_name = "";
     std::cin >> input_file_name;
 
+    /* input_file with the flags (input, binary and "at end") */
     std::ifstream input_file(input_file_name, std::ios::in|std::ios::binary|std::ios::ate);
 
     if(input_file.is_open())
