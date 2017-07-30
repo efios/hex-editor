@@ -6,14 +6,6 @@
 
 #include <stdio.h>
 
-int ndigits(int number)
-{
-    int i = 0; 
-    for(; number > 0; ++i)
-        number = number / 10;
-
-    return i;
-}
 
 
 int main()
