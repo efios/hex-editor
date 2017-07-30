@@ -13,49 +13,21 @@ int ndigits(int number)
     return i;
 }
 
-/* Decimal to hex (0 - FF) */
-std::string to_hex(int decimal_number)
-{
-    std::string hex_number("", ndigits(decimal_number));
-
-    int remainder = 0;
-    int quotient = decimal_number;
-    int i = 0;
-
-    while(quotient != 0)
-    {
-        remainder = quotient % 16;
-
-        if(remainder < 10)
-            hex_number[i] = remainder + 48;
-        else
-            hex_number[i] = remainder + 55;
-
-        ++i;
-        quotient = quotient / 16;    
-    }
-
-    hex_number[i] = '\0';
-    std::reverse(hex_number.begin(), hex_number.end());
-
-    return hex_number;
-}
 
 int main()
 {
-    const char *input_file_name = "test.txt";
+    using namespace std;
 
-    std::ofstream input_file;
-    input_file.open(input_file_name);
+    std::string input_file_name = "../test.txt";
 
-    const unsigned short buffer_size = 1024;
+    std::ifstream input_file(input_file_name, ios::in|ios::binary|ios::ate);
 
-    char string_buffer[buffer_size];
-
-    for(const auto &byte : string_buffer)
+    if(input_file.is_open())
     {
-        std::cout << string_buffer[i];
-    }  
+
+    }
+    char *char_buffer;
+      
 
     input_file.close();
 
