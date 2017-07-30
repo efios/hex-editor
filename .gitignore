@@ -31,5 +31,8 @@
 *.out
 *.app
 
+# Others
+*.txt
+
 # Directories
 .vscode
