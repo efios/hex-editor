@@ -4,6 +4,8 @@
 #include <iostream>
 #include <algorithm>
 
+#include <stdio.h>
+
 int ndigits(int number)
 {
     int i = 0; 
@@ -17,6 +19,8 @@ int ndigits(int number)
 int main()
 {
     using namespace std;
+    std::cout.flags(ios::hex);
+
 
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
@@ -31,8 +35,14 @@ int main()
 
         input_file.seekg(0, ios::beg); /* Set position to beginning of file. */
         input_file.read(char_buffer, buffer_size);
-
         input_file.close();
+
+
+        for(int i = 0; i < buffer_size; ++i)
+        {
+            printf("%X ", char_buffer[i]);
+        }
+
         delete[] char_buffer;
     }
     else

@@ -25,3 +25,12 @@ std::string to_hex(int decimal_number)
 
     return hex_number;
 }
+
+int ndigits(int number)
+{
+    int i = 0; 
+    for(; number > 0; ++i)
+        number = number / 10;
+
+    return i;
+}
