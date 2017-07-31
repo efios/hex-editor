@@ -5,8 +5,7 @@
 
 typedef unsigned int uint32_t;
 
-void write_to_file(std::ofstream &output_file,
-const char *char_buffer[], uint32_t buffer_size);
+void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_size);
 
 int main()
 {
@@ -55,16 +54,17 @@ int main()
 }
 
 
-void write_to_file(std::ofstream &output_file,
-char char_buffer[], const uint32_t buffer_size)
+void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_size)
 {
-    /* We assume the file was "opened" succesfully */    
-        for(uint32_t i = 1; i <= buffer_size; ++i)
-        {
-            output_file << std::hex << std::setw(2) << std::setfill('0') 
-            << uint32_t(char_buffer[i]) << ' ';
+    constexpr int end_line = sizeof(char) << 4; /* 16 */
 
-            if((i % (sizeof(char) << 4)) == 0)
-                output_file << '\n';
+    /* We assume the file was "opened" succesfully */    
+    for(int i = 1; i <= buffer_size; ++i)
+    {
+        output_file << std::hex << std::setw(2) << std::setfill('0') 
+        << uint32_t(char_buffer[i]) << ' ';
+
+        if(i % end_line == 0)
+            output_file << '\n';
     }
 }
