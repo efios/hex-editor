@@ -3,6 +3,10 @@
 #include <iomanip>
 #include <iostream>
 
+typedef unsigned int uint32_t;
+
+void write_to_file(std::ofstream &output_file,
+const char *char_buffer[], uint32_t buffer_size);
 
 int main()
 {
@@ -35,13 +39,7 @@ int main()
 
         if(output_file.is_open())
         {   
-            for(int i = 1; i <= buffer_size; ++i)
-            {
-                output_file << std::hex << std::setw(2) << std::setfill('0') <<  uint32_t(char_buffer[i]) << ' ';
-
-                if((i % (sizeof(char) << 4)) == 0)
-                    output_file << '\n';
-            }
+            write_to_file(output_file, char_buffer, buffer_size);            
             output_file.close();
         }
 
@@ -54,4 +52,19 @@ int main()
     }
 
     return 0;
+}
+
+
+void write_to_file(std::ofstream &output_file,
+char char_buffer[], const uint32_t buffer_size)
+{
+    /* We assume the file was "opened" succesfully */    
+        for(uint32_t i = 1; i <= buffer_size; ++i)
+        {
+            output_file << std::hex << std::setw(2) << std::setfill('0') 
+            << uint32_t(char_buffer[i]) << ' ';
+
+            if((i % (sizeof(char) << 4)) == 0)
+                output_file << '\n';
+    }
 }
