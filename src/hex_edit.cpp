@@ -3,35 +3,9 @@
 #include <iomanip>
 #include <iostream>
 
-#include <ctype.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <termios.h>
-
-
-struct termios original_termios;
-
-void disable_raw_mode()
-{
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &original_termios);
-}
-
-void enable_raw_mode()
-{
-    tcgetattr(STDIN_FILENO, &original_termios);
-    atexit(disable_raw_mode);
-
-    struct termios raw = original_termios;
-
-    raw.c_oflag &= ~(OPOST);
-    raw.c_iflag &= ~(IXON | ICRNL | BRKINT | INPCK | ISTRIP);
-    raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
-}
-
 
 int main()
 {
-    enable_raw_mode();
 
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
