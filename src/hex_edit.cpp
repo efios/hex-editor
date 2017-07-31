@@ -61,7 +61,7 @@ void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_siz
     /* We assume the file was "opened" succesfully */    
     for(int i = 1; i < buffer_size; ++i)
     {
-        output_file << std::hex << std::setw(2) << char_buffer[i] << ' ';
+        output_file << std::hex << std::setw(2) << uint32_t(char_buffer[i]) << ' ';
 
         if(i % end_line == 0)
             output_file << '\n';
