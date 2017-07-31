@@ -3,7 +3,6 @@
 #include <iomanip>
 #include <iostream>
 
-#include <stdio.h> /* Used for printing hex values */
 #include <ctype.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -37,7 +36,7 @@ int main()
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
        
-    printf("Enter the name of the file you want to read from:\n");
+    std::cout << "Enter the name of the file you want to read from:\n";
     std::string input_file_name = "";
     std::cin >> input_file_name;
 
@@ -54,7 +53,7 @@ int main()
         input_file.close();
 
 
-        printf("Enter the name of the file you'd like to write to:\n");
+        std::cout << "Enter the name of the file you'd like to write to:\n";
         std::string output_file_name = "";
         std::cin >> output_file_name;
 
