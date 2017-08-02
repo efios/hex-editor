@@ -18,12 +18,11 @@ int main()
     raw(); /* No signal from special characters/combinations */
     noecho(); /* Turn of echoing */
     keypad(stdscr, TRUE); /* Enable arrow keys and such */
-
-    std::streampos buffer_size = 0;
-    char *char_buffer = nullptr;
-       
-    /* std::cout << "Enter the name of the file you want to read from:\n"; */
-    printw("Please enter the name of the file you want to read from:\n");
+    
+    int rows, columns;
+    getmaxyx(stdscr, rows, columns);
+      
+    mvprintw(rows/2, (columns-55)/2, "Please enter the name of the file you want to read from:\n");
     refresh();
 
     char input_file_name[55];
@@ -31,6 +30,8 @@ int main()
 
     /* Open input_file with the flags (input, binary and at end) */
     std::ifstream input_file(input_file_name, std::ios::in | std::ios::binary | std::ios::ate);
+    std::streampos buffer_size = 0;
+    char *char_buffer = nullptr;
 
     if(input_file.is_open())
     {
@@ -70,11 +71,12 @@ int main()
 
         delete[] char_buffer;
         char_buffer = nullptr;
+
         endwin();
     }
     else
     {
-        std::cout << "The file probably doesn't exist\n";
+        printw("The file probably doesn't exist\n");
         endwin();
     }
     
