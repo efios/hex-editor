@@ -11,36 +11,6 @@
 void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_size);
 void read_file(std::ifstream &input_file, char *char_buffer, int buffer_size);
 
-int tmp()
-{
-    char ch = 0;
-    int rows, columns;
-    rows = 10;
-    columns = 10;
-
-    initscr();
-    raw();
-    noecho();
-    keypad(stdscr, TRUE);
-
-    ch = getch();
-
-    if(ch == KEY_F(10))
-    {
-        endwin();
-    }
-    else
-    {
-        printw("The pressed key is ");
-        mvaddch(rows, columns, ch | A_BOLD | A_UNDERLINE);
-    }
-
-    refresh();
-    getch();
-    endwin();
-
-    return 0;
-}
 
 int main()
 {
