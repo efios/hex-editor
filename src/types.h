@@ -1,7 +1,7 @@
 #ifndef __TYPES_H
 #define __TYPES_H
 
-/* Types based on 64-bit linux system */
+/* Type sizes based on 64-bit linux systems */
 
 #ifdef UNSIGNED_TYPES
 typedef unsigned char       uint8_t;    /* byte */

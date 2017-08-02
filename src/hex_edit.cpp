@@ -3,15 +3,18 @@
 #include <iomanip>
 #include <iostream>
 
+#include "ncurses.h"
+
 #define UNSIGNED_TYPES
 #include "types.h"
-
 
 void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_size);
 void read_file(std::ifstream &input_file, char *char_buffer, int buffer_size);
 
 int main()
 {
+    initscr();
+
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
        
@@ -30,6 +33,7 @@ int main()
         read_file(input_file, char_buffer, buffer_size);
         input_file.close();
 
+        /*
         std::cout << "Enter the name of the file you'd like to write to:\n";
         std::string output_file_name = "";
         std::cin >> output_file_name;
@@ -42,13 +46,26 @@ int main()
            
             output_file.close();
         }
-    
+        */
+
+        for(int i = 0; i < buffer_size; ++i)
+        {
+            printw("%X ", char_buffer[i]);
+            if(i % 16 == 0)
+                printw("\n");
+        }
+
+        refresh();
+        getch();
+
         delete[] char_buffer;
         char_buffer = nullptr;
+        endwin();
     }
     else
     {
         std::cout << "The file probably doesn't exist\n";
+        endwin();
     }
     
     return 0;
