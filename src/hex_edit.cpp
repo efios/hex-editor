@@ -12,7 +12,6 @@ void read_file(std::ifstream &input_file, char *char_buffer, int buffer_size);
 
 int main()
 {
-
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
        
