@@ -33,6 +33,8 @@
 
 # Others
 *.txt
+*.swp
+*.cpp.swp
 
 # Directories
 .vscode
