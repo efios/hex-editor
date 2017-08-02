@@ -3,7 +3,9 @@
 #include <iomanip>
 #include <iostream>
 
-typedef unsigned int uint32_t;
+#define UNSIGNED_TYPES
+#include "types.h"
+
 
 void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_size);
 void read_file(std::ifstream &input_file, char *char_buffer, int buffer_size);
