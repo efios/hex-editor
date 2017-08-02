@@ -11,22 +11,62 @@
 void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_size);
 void read_file(std::ifstream &input_file, char *char_buffer, int buffer_size);
 
+int tmp()
+{
+    char ch = 0;
+    int rows, columns;
+    rows = 10;
+    columns = 10;
+
+    initscr();
+    raw();
+    noecho();
+    keypad(stdscr, TRUE);
+
+    ch = getch();
+
+    if(ch == KEY_F(10))
+    {
+        endwin();
+    }
+    else
+    {
+        printw("The pressed key is ");
+        mvaddch(rows, columns, ch | A_BOLD | A_UNDERLINE);
+    }
+
+    refresh();
+    getch();
+    endwin();
+
+    return 0;
+}
+
 int main()
 {
-    initscr();
+    initscr(); /* Initalize ncurses */
+    raw(); /* No signal from special characters/combinations */
+    noecho(); /* Turn of echoing */
+    keypad(stdscr, TRUE); /* Enable arrow keys and such */
 
     std::streampos buffer_size = 0;
     char *char_buffer = nullptr;
        
-    std::cout << "Enter the name of the file you want to read from:\n";
-    std::string input_file_name = "";
-    std::cin >> input_file_name;
+    /* std::cout << "Enter the name of the file you want to read from:\n"; */
+    printw("Please enter the name of the file you want to read from:\n");
+    refresh();
+
+    char input_file_name[55];
+    getstr(input_file_name);
 
     /* Open input_file with the flags (input, binary and at end) */
     std::ifstream input_file(input_file_name, std::ios::in | std::ios::binary | std::ios::ate);
 
     if(input_file.is_open())
     {
+        printw("inside input_file\n");
+        refresh();
+
         buffer_size = input_file.tellg(); /* Get the file length */
         char_buffer = new char[buffer_size];
         
@@ -48,7 +88,7 @@ int main()
         }
         */
 
-        for(int i = 0; i < buffer_size; ++i)
+        for(int i = 1; i-1 < buffer_size; ++i)
         {
             printw("%X ", char_buffer[i]);
             if(i % 16 == 0)
