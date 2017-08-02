@@ -19,7 +19,7 @@ int main()
     std::string input_file_name = "";
     std::cin >> input_file_name;
 
-    /* Open input_file with the flags (input, binary and "at end") */
+    /* Open input_file with the flags (input, binary and at end) */
     std::ifstream input_file(input_file_name, std::ios::in | std::ios::binary | std::ios::ate);
 
     if(input_file.is_open())
