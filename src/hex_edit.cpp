@@ -6,6 +6,7 @@
 typedef unsigned int uint32_t;
 
 void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_size);
+void read_file(std::ifstream &input_file, char *char_buffer, int buffer_size);
 
 int main()
 {
@@ -18,15 +19,14 @@ int main()
     std::cin >> input_file_name;
 
     /* Open input_file with the flags (input, binary and "at end") */
-    std::ifstream input_file(input_file_name, std::ios::in|std::ios::binary|std::ios::ate);
+    std::ifstream input_file(input_file_name, std::ios::in | std::ios::binary | std::ios::ate);
 
     if(input_file.is_open())
     {
         buffer_size = input_file.tellg(); /* Get the file length */
         char_buffer = new char[buffer_size];
-
-        input_file.seekg(0, std::ios::beg); /* Set position to beginning of file. */
-        input_file.read(char_buffer, buffer_size); /* Read contents of input_file into char_buffer */
+        
+        read_file(input_file, char_buffer, buffer_size);
         input_file.close();
 
         std::cout << "Enter the name of the file you'd like to write to:\n";
@@ -49,7 +49,7 @@ int main()
     {
         std::cout << "The file probably doesn't exist\n";
     }
-
+    
     return 0;
 }
 
@@ -66,4 +66,11 @@ void write_to_file(std::ofstream &output_file, char *char_buffer, int buffer_siz
         if(i % end_line == 0)
             output_file << '\n';
     }
+}
+
+/* Read contents of file into char buffer */
+void read_file(std::ifstream &input_file, char *char_buffer, int buffer_size)
+{
+    input_file.seekg(0, std::ios::beg); /* Move to beginning of file */
+    input_file.read(char_buffer, buffer_size);
 }
