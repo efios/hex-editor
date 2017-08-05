@@ -18,15 +18,18 @@ int main()
     raw(); /* No signal from special characters/combinations */
     noecho(); /* Turn of echoing */
     keypad(stdscr, TRUE); /* Enable arrow keys and such */
-    
+   
     int rows, columns;
     getmaxyx(stdscr, rows, columns);
       
     mvprintw(rows/2, (columns-55)/2, "Please enter the name of the file you want to read from:\n");
     refresh();
-
+    
+    echo(); /* Enable echoing for file name */
     char input_file_name[55];
     getstr(input_file_name);
+    
+    noecho(); /* Disable again. */
 
     /* Open input_file with the flags (input, binary and at end) */
     std::ifstream input_file(input_file_name, std::ios::in | std::ios::binary | std::ios::ate);
